@@ -1,15 +1,15 @@
-# Copyright (C) 2023 WP Rollback
+# Copyright (C) 2024 WP Rollback
 # This file is distributed under the same license as the WP Rollback plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Rollback 2.0.3\n"
+"Project-Id-Version: WP Rollback 2.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-rollback\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-30T16:34:53+00:00\n"
+"POT-Creation-Date: 2024-01-03T21:19:10+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: wp-rollback\n"
@@ -30,10 +30,10 @@ msgid "Rollback (or forward) any WordPress.org plugin, theme or block like a bos
 msgstr ""
 
 #: src/class-rollback-multisite-compatibility.php:83
-#: wp-rollback.php:246
+#: wp-rollback.php:241
+#: wp-rollback.php:403
 #: wp-rollback.php:404
-#: wp-rollback.php:405
-#: wp-rollback.php:510
+#: wp-rollback.php:514
 #: build/admin.js:1
 #: build/admin.js:4
 msgid "Rollback"
@@ -48,33 +48,33 @@ msgstr ""
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: wp-rollback.php:247
+#: wp-rollback.php:242
 msgid "No Rollback Available: This is a non-WordPress.org theme."
 msgstr ""
 
-#: wp-rollback.php:251
+#: wp-rollback.php:246
 #: build/admin.js:1
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s Link.
-#: wp-rollback.php:282
+#: wp-rollback.php:278
 msgid "Sorry, we couldn't find a changelog entry found for this version. Try checking the <a href=\"%s\" target=\"_blank\">developer log</a> on WP.org."
 msgstr ""
 
-#: wp-rollback.php:288
+#: wp-rollback.php:284
 msgid "Please select a version number to perform a rollback."
 msgstr ""
 
-#: wp-rollback.php:360
+#: wp-rollback.php:359
 msgid "You do not have sufficient permissions to perform rollbacks for this site."
 msgstr ""
 
-#: wp-rollback.php:627
+#: wp-rollback.php:631
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"https://wordpress.org/support/\">support forums</a>."
 msgstr ""
 
-#: wp-rollback.php:630
+#: wp-rollback.php:634
 msgid "(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)"
 msgstr ""
 
