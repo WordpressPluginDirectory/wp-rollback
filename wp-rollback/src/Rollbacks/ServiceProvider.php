@@ -19,9 +19,8 @@ use WpRollback\SharedCore\Core\Contracts\ServiceProvider as ServiceProviderContr
 use WpRollback\Free\Rollbacks\Actions\RegisterAdminMenu;
 use WpRollback\Free\Rollbacks\PluginRollback\Actions\AddPluginRollbackLinks;
 use WpRollback\Free\Rollbacks\PluginRollback\Actions\PreCurrentActivePlugins;
-use WpRollback\Free\Rollbacks\ThemeRollback\Actions\PrepareThemeJS;
-use WpRollback\Free\Rollbacks\ThemeRollback\Actions\UpdateThemeList;
-use WpRollback\Free\Rollbacks\ThemeRollback\Controllers\TypeConfirmationController;
+use WpRollback\Free\Rollbacks\ThemeRollback\Actions\AddMultisiteThemeRollbackLinks;
+use WpRollback\Free\Rollbacks\ThemeRollback\Actions\ThemeUpgrader;
 use WpRollback\Free\Rollbacks\ThemeRollback\Views\ThemeRollbackButton;
 use WpRollback\SharedCore\Core\SharedCore;
 use WpRollback\Free\Core\Constants;
@@ -130,9 +129,7 @@ class ServiceProvider implements ServiceProviderContract
      */
     private function bootThemeRollback(): void
     {
-        Hooks::addAction('set_site_transient_update_themes', UpdateThemeList::class);
-        Hooks::addFilter('wp_prepare_themes_for_js', PrepareThemeJS::class);
-        Hooks::addAction('wp_ajax_is_wordpress_theme', TypeConfirmationController::class);
+        // Theme rollback.
         Hooks::addAction('admin_enqueue_scripts', ThemeRollbackButton::class);
     }
 
@@ -142,12 +139,22 @@ class ServiceProvider implements ServiceProviderContract
      */
     private function addMultiSiteSupport(): void
     {
-        Hooks::addFilter('theme_action_links', MultisiteSupport::class, 'addThemeLink', 20, 2);
-        
         // For multisite support
         Hooks::addAction('network_admin_menu', self::class, 'registerMultisiteMenu');
         
         Hooks::addFilter('network_admin_plugin_action_links', AddPluginRollbackLinks::class, '__invoke', 20, 4);
+        
+        // Register factory for AddMultisiteThemeRollbackLinks
+        // Note: This only applies in network admin - single sites use ThemeRollbackButton instead
+        Hooks::registerFactory(
+            AddMultisiteThemeRollbackLinks::class,
+            function () {
+                return SharedCore::container()->make(AddMultisiteThemeRollbackLinks::class);
+            }
+        );
+        
+        // Add theme rollback links in network admin themes table
+        Hooks::addFilter('theme_action_links', AddMultisiteThemeRollbackLinks::class, '__invoke', 20, 3);
     }
     
     /**
